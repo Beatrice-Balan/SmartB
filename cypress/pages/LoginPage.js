@@ -22,20 +22,24 @@ export default class LoginPage {
 
   // Reusable methods for login page
   enterUsername(user) {
-    this.getUsernameInput().type(user);
+    if(user) this.getUsernameInput().type(user);
   }
 
   enterPassword(password) {
-    this.getPasswordInput().type(password);
+    if(password) this.getPasswordInput().type(password);
   }
 
   clickOnLoginButton() {
     this.getLoginButton().click();
   }
 
-  login(user, password) {
-    this.enterUsername(user);
-    this.enterPassword(password);
-    this.clickOnLoginButton();
+  login(user, password, click = true) {
+  this.enterUsername(user);
+    if (click) {
+        this.enterPassword(password);
+        this.clickOnLoginButton();
+    } else {
+        this.getPasswordInput().type(`${password}{enter}`);
+    }
   }
 }
