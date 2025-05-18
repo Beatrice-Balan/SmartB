@@ -2,10 +2,11 @@
 import BasePage from "../../pages/BasePage";
 import LoginPage from "../../pages/LoginPage";
 
-describe('Login Verification', () => {
 
   const loginPage = new LoginPage();
   const basePage = new BasePage();
+
+describe('Login Verification', () => {
 
   beforeEach(() => {
     cy.visit(Cypress.env("APP_BASE_URL"));
@@ -60,3 +61,28 @@ describe('Login Verification', () => {
     });
   });
 });
+
+
+describe('Login Verification - Addtional Tests', () => {
+    beforeEach(() => {
+    cy.visit(Cypress.env("APP_BASE_URL"));
+  })
+
+
+  it('TG11S-T175 - Validate password input is masked', () => {
+    loginPage.getPasswordInput().should('have.attr', 'type', 'password')
+  })
+
+
+  it('TG11S-T168 - Validate login with valid credentials AND enter', () => {
+    loginPage.login(Cypress.env('USER'), Cypress.env('PASSWORD'), false);
+
+    cy.url().should('include', 'weborders');
+
+    basePage.getWebOrdersHeading().should('have.text', 'Web Orders');
+    basePage.getLogoutButton().should('have.text', 'Logout');
+    basePage.getWelcomeUserInfo().should('include.text', Cypress.env('USER'));
+  })
+
+
+})
