@@ -14,4 +14,15 @@ export default class BasePage {
   getLeftPanelOptions() {
     return cy.get('#ctl00_menu a');
   }
+
+  getRightPanelHeading() {
+    return cy.get('h2');
+  }
+
+    getRightPanelMainContentTable() {
+    return cy.get('.content table').first();
+  }
+
+
+
 }
