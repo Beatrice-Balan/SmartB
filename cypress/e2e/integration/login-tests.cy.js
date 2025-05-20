@@ -6,7 +6,7 @@ import LoginPage from "../../pages/LoginPage";
   const loginPage = new LoginPage();
   const basePage = new BasePage();
 
-describe('Login Verification', () => {
+describe('Login Verification @Smoke', () => {
 
   beforeEach(() => {
     cy.visit(Cypress.env("APP_BASE_URL"));
